@@ -1,0 +1,54 @@
+<html>
+<head>
+<script>
+function POST_AJAX(msg, dest) {
+  var xhreq = new XMLHttpRequest();
+  xhreq.onreadystatechange=function() {
+    if(xhreq.readyState==4 && xhreq.status==200) {
+      document.getElementById("resp").innerHTML = "Server PHP says: " + xhreq.responseText
+    }
+  }
+  xhreq.open("POST","sendControlMessage.php",true);
+  xhreq.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  xhreq.send("message=" + msg + "&dest=" + dest);
+}
+</script>
+
+<style>
+body, table{
+  font-size: 40px;
+}
+
+table{
+ width: 100%;
+ text-align: center;
+}
+
+button{
+  font-size: 40px;
+}
+
+</style>
+</head>
+
+<body>
+<table><tr><td>
+
+<h2>Andy K's Intriguing Web-UDP Traffic Light Control System</h2>
+192.168.1.70:<br>
+<button onclick="POST_AJAX('red','192.168.1.70')">red</button><br>
+<button onclick="POST_AJAX('redyellow','192.168.1.70')">red & yellow</button><br>
+<button onclick="POST_AJAX('yellow','192.168.1.70')">yellow</button><br>
+<button onclick="POST_AJAX('green','192.168.1.70')">green</button><br>
+
+<br>
+<div id="resp"></div>
+<br>
+
+Made by Andy C. K, SoSLUG (Southend Linux User Group - organisers of Chelmsford & Southend Raspberry Jam events)<br>
+<br>
+andy@soslug.org<br>
+www.soslug.org<br>
+
+</body>
+</html>
